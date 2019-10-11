@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>2dPlot</title>
+    <h1 id="title">2D Plot</h1>
+<canvas id="plotArea" width="200" height="100"></canvas>
+
+  <div id = "entry">
+    <label id="point-label">Point to Plot</label>
+
+    <input id="point" type="text"  placeholder="Please enter a point(x,y)." required>
+    <p>
+
+    <p>
+      What is the plot type?
+    <select id="dropdown">
+      <option disabled value>Select an option</option>
+      <option  value="cart">Cartesian</option>
+      <option value="polar">Polar</option>
+      </select>
+      </p>
+    <p>
+    <label><input value="1" type="checkbox" name="next" checked> Gridlines</label>
+
+  </input>
+  </div>
+<button type="submit" id="plot" onclick= "drawPlotArea()">Plot</button>
+
+</html>
+<script>
+
+function drawPlotArea(){
+
+
+  var plot = document.getElementById("plotArea");
+  var context = plot.getContext("2d");
+  context.clearRect(0, 0, plot.width, plot.height);
+  var pointInput = document.getElementById("point").value;
+
+
+  if(pointInput){
+    var point = parsePoints(pointInput);
+    var a = parseInt(point[0]);
+    var b = parseInt(point[1]);
+    context.beginPath();
+    context.arc(5+a, 95-b, 1, 0, 2 * Math.PI);
+    context.strokeStyle = 'red';
+    context.fillStyle = 'red';
+    context.stroke();
+    console.log(point[0]);
+  }
+
+context.beginPath();
+context.moveTo(5, 0);
+context.lineTo(5, 95);
+context.moveTo(5, 95);
+context.lineTo(200, 95);
+context.strokeStyle = 'black';
+context.stroke();
+}
+
+function parsePoints(textPoints){
+  var pointInput = textPoints;
+  var pointComponents = pointInput.split(",");
+  console.log(pointComponents);
+  return pointComponents;
+
+}
+
+drawPlotArea();
+
+
+</script>
